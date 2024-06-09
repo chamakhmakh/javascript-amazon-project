@@ -70,7 +70,7 @@ function updateCartQuantity() {
 
 updateCartQuantity();
 
-function messageAdded(addedMessage, previousTimeoutId) {
+function messageAdded(addedMessage, previousTimeoutId, productId) {
   addedMessage.classList.add('added-to-cart-visible');
 
   if (previousTimeoutId) {
