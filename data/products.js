@@ -34,7 +34,35 @@ class Product{
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return '';
+  }
 }
+
+// extends maaneha bch tekho el product o tzid fih eli fel clothing maghyr ma noqodo 
+// naaawdo fel product lkol bch nzido haja special lel clothing
+
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+// Replace the parent's method "method overriding"
+// maaneha el retunr li fel product tbadlet bel retunr li fel clothing
+  extraInfoHTML() {
+    // super.extraInfoHTML();
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">
+        Size chart
+      </a>
+    `;
+  }
+}
+
+// inheritance lets us reuse code betwenn classes (eli lfoq mtaa el clothing)
 
 export const products = [
   {
@@ -714,5 +742,9 @@ export const products = [
     priceCents: 2999
   }
 ].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
+
   return new Product(productDetails);
 });
